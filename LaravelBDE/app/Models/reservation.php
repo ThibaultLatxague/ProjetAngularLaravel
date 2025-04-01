@@ -18,4 +18,13 @@ class reservation extends Model
         'goodies',
         'idSoiree',
     ];
+
+    protected $casts = [
+        'goodies' => 'array',
+    ];
+
+    public function soiree()
+    {
+        return $this->belongsTo(soiree::class);
+    }
 }

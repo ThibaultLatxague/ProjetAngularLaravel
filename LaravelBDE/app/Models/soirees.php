@@ -16,4 +16,9 @@ class soirees extends Model
         'capacite',
         'theme',
     ];
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }
