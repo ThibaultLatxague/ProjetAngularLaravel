@@ -1,0 +1,46 @@
+<!-- <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+</mat-form-field> -->
+
+<mat-grid-list cols="4" rowHeight="2:1" gutterSize="10px" class="example-grid-list">
+    @for (soiree of soirees; track soiree) {
+    <mat-card class="example-card" appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>{{ soiree.nom }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p>{{ soiree.lieu }}</p>
+        <p>{{ soiree.date }}</p>
+    </mat-card-content>
+    <mat-card-footer class="example-card-footer">
+        <mat-chip-set aria-label="Soirée details">
+        <mat-chip><mat-icon>attach_money</mat-icon>{{ soiree.prix }}</mat-chip>
+        <mat-chip><mat-icon>person</mat-icon>{{ soiree.participants }}</mat-chip>
+        <mat-chip><mat-icon>celebration</mat-icon>{{ soiree.theme }}</mat-chip>
+        <a routerLink="/reservations/view/{{ soiree.id }}">
+            <mat-chip><mat-icon>book</mat-icon>Réservations</mat-chip>
+        </a>
+        </mat-chip-set>
+    </mat-card-footer>
+    </mat-card>
+    }
+</mat-grid-list>
+
+<!-- <mat-card *ngFor="let soiree of soirees" class="example-card" appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>{{soiree.nom}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p>{{soiree.lieu}}</p>
+        <p>{{soiree.date}}</p>
+    </mat-card-content>
+    <mat-card-footer class="example-card-footer">
+        <mat-chip-set aria-label="Chihuahua traits">
+            <mat-chip><mat-icon>attach_money</mat-icon>{{soiree.prix}}</mat-chip>
+            <mat-chip><mat-icon>person</mat-icon>{{soiree.participants}}</mat-chip>
+            <mat-chip><mat-icon>celebration</mat-icon>{{soiree.theme}}</mat-chip>
+            <a routerLink="/reservations/view/{{soiree.id}}"><mat-chip><mat-icon>book</mat-icon>Réservations</mat-chip></a>
+        </mat-chip-set>
+    </mat-card-footer>
+</mat-card> -->
