@@ -11,15 +11,7 @@ class SoireesController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return response()->json(Soiree::all());
     }
 
     /**
@@ -27,7 +19,8 @@ class SoireesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $soiree = Soiree::create($request->all());
+        return response()->json($soiree, 201);
     }
 
     /**
@@ -35,30 +28,28 @@ class SoireesController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $soiree = Soiree::find($id);  // Recherche la soirée par ID
+        if (!$soiree) {
+            return response()->json(['message' => 'Soirée not found'], 404);  // Si la soirée n'existe pas
+        }
+        return response()->json($soiree);  // Renvoie l'objet Soiree trouvé
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Soiree $soiree)
     {
-        //
+        $soiree->update($request->all());
+        return response()->json($soiree);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Soiree $soiree)
     {
-        //
+        $soiree->delete();
+        return response()->json(null, 204);
     }
 }
