@@ -18,7 +18,7 @@ import { Goodies } from '../models/goodies.model';
 
 export class ListGoodiesComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['id', 'nom', 'quantite', 'description', 'cout', 'action'];
-  dataSource = new MatTableDataSource<Goodies>([]); // ✅ Initialise avec un tableau vide
+  dataSource = new MatTableDataSource<Goodies>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -27,14 +27,18 @@ export class ListGoodiesComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.myGoodiesService.getGoodies().subscribe((goodies: Goodies[]) => {
-      console.log(goodies);
-      this.dataSource.data = goodies;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.dataSource.data = goodies;  
+      
+      // Vérifie si paginator et sort existent avant de les assigner
+      if (this.paginator && this.sort) {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
     });
   }
 
   ngAfterViewInit() {
+    // Déplace l'affectation ici pour être sûr que la Vue est bien chargée
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
