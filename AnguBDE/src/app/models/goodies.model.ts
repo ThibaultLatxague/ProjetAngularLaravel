@@ -1,4 +1,4 @@
-export class StockGoodies {
+export class Goodies {
     id!: number;
     nom!: string;
     quantite!: number;
