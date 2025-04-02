@@ -20,7 +20,7 @@
         <!-- Nom Column -->
         <ng-container matColumnDef="nom">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
-            <td mat-cell *matCellDef="let row"> {{row.name}}% </td>
+            <td mat-cell *matCellDef="let row"> {{row.nom}} </td>
         </ng-container>
 
         <!-- Quantite Column -->
@@ -38,7 +38,7 @@
         <!-- Cout Column -->
         <ng-container matColumnDef="cout">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Cout </th>
-            <td mat-cell *matCellDef="let row"> {{row.cout}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.coutUnitaire}} </td>
         </ng-container>
 
         <!-- Action Column -->

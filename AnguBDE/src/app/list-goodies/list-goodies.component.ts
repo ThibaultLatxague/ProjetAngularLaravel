@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -6,47 +6,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule, MatFormField} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {RouterModule} from '@angular/router';
-
-export interface UserData {
-  id: string;
-  name: string;
-  quantite: string;
-  description: string;
-  cout: string;
-}
-
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
+import { GoodiesService } from '../services/goodies.service';
+import { Goodies } from '../models/goodies.model';
 
 @Component({
   selector: 'app-list-goodies',
@@ -54,19 +15,23 @@ const NAMES: string[] = [
   styleUrl: './list-goodies.component.scss',
   imports: [RouterModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule],
 })
-export class ListGoodiesComponent implements AfterViewInit{
+
+export class ListGoodiesComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['id', 'nom', 'quantite', 'description', 'cout', 'action'];
-  dataSource: MatTableDataSource<UserData>;
+  dataSource = new MatTableDataSource<Goodies>([]); // ✅ Initialise avec un tableau vide
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 50}, (_, k) => createNewUser(k + 1));
+  constructor(private myGoodiesService: GoodiesService) {}
 
-    // Assigner les données à la source pour rendre le tableau
-    this.dataSource = new MatTableDataSource(users);
+  ngOnInit() {
+    this.myGoodiesService.getGoodies().subscribe((goodies: Goodies[]) => {
+      console.log(goodies);
+      this.dataSource.data = goodies;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   ngAfterViewInit() {
@@ -82,21 +47,4 @@ export class ListGoodiesComponent implements AfterViewInit{
       this.dataSource.paginator.firstPage();
     }
   }
-}
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    quantite: Math.round(Math.random() * 100).toString(),
-    cout: Math.round(Math.random() * 100).toString(),
-    description: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-  };
 }

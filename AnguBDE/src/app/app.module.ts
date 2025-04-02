@@ -12,6 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { GoodiesComponent } from './goodies/goodies.component';
 import { ListReservationsComponent } from './list-reservations/list-reservations.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ReservationsComponent } from './reservations/reservations.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule,
   ],
   providers: [
     provideClientHydration(withEventReplay())
