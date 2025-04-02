@@ -45,10 +45,10 @@
         <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
             <td mat-cell *matCellDef="let row">
-                <a mat-fab extended routerLink="/goodies/edit/{{row.id}}">
+                <a mat-fab extended>
                     <mat-icon>edit</mat-icon>
                 </a>
-                <a mat-fab extended routerLink="/goodies/delete/{{row.id}}">
+                <a mat-fab extended (click)="deleteGoodie(row.id)">
                     <mat-icon>delete</mat-icon>
                 </a>
             </td>

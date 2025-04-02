@@ -8,6 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {RouterModule} from '@angular/router';
 import { GoodiesService } from '../services/goodies.service';
 import { Goodies } from '../models/goodies.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-goodies',
@@ -23,7 +24,7 @@ export class ListGoodiesComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private myGoodiesService: GoodiesService) {}
+  constructor(private myGoodiesService: GoodiesService, private router: Router) {}
 
   ngOnInit() {
     this.myGoodiesService.getGoodies().subscribe((goodies: Goodies[]) => {
@@ -50,5 +51,17 @@ export class ListGoodiesComponent implements AfterViewInit, OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  deleteGoodie(id: number): void {
+    this.myGoodiesService.deleteGoodie(id).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/goodies');
+      },
+      error: err => {
+        console.error('Observable suppression Goodie a émis une erreur : ' + + (err.error?.message || JSON.stringify(err)));
+        alert('Une erreur est survenue : ' + (err.error?.message || JSON.stringify(err)));
+      }
+    })
   }
 }

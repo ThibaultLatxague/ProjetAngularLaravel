@@ -26,10 +26,9 @@ export class GoodiesService {
   getGoodieById(id: number): Observable<Goodies> {
     return this.http.get<Goodies>(`http://localhost:8000/goodies/${id}`);
   }
-  
+
   // On ajoute un goodies
   addGoodie(goodie: Goodies): Observable<Goodies> {
-    this.http.get('http://localhost:8000/sanctum/csrf-cookie', { withCredentials: true }).subscribe();
     return this.http.post<Goodies>('http://localhost:8000/goodies', goodie, httpOptions);
   }
 
