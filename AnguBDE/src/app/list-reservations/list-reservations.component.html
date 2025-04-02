@@ -1,1 +1,85 @@
-<p>list-reservations works!</p>
+<section>
+    <div class="example-button-row">
+        <a mat-raised-button routerLink="/reservations/add">Ajouter une réservation</a>
+    </div>
+</section>
+
+<mat-form-field>
+    <mat-label>Filtrer</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Jean Dupont" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <!-- Nom Étudiant Column -->
+        <ng-container matColumnDef="nomEtudiant">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Étudiant </th>
+            <td mat-cell *matCellDef="let row"> {{row.nomEtudiant}} </td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let row"> {{row.email_etudiant}} </td>
+        </ng-container>
+
+        <!-- Téléphone Column -->
+        <ng-container matColumnDef="telephone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Téléphone </th>
+            <td mat-cell *matCellDef="let row"> {{row.telephone_etudiant}} </td>
+        </ng-container>
+
+        <!-- Nom Soirée Column -->
+        <ng-container matColumnDef="nomSoiree">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom Soirée </th>
+            <td mat-cell *matCellDef="let row"> {{row.nom_soiree}} </td>
+        </ng-container>
+
+        <!-- Date Réservation Column -->
+        <ng-container matColumnDef="dateReservation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Réservation </th>
+            <td mat-cell *matCellDef="let row"> {{row.date_reservation}} </td>
+        </ng-container>
+
+        <!-- Statut Column -->
+        <ng-container matColumnDef="statut">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut </th>
+            <td mat-cell *matCellDef="let row"> {{row.statut}} </td>
+        </ng-container>
+
+        <!-- Goodies Column -->
+        <ng-container matColumnDef="goodies">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Goodies </th>
+            <td mat-cell *matCellDef="let row"> {{row.goodies?.join(', ') || 'Aucun'}} </td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let row">
+                <a mat-fab extended>
+                    <mat-icon>edit</mat-icon>
+                </a>
+                <a mat-fab extended (click)="deleteReservation(row.id)">
+                    <mat-icon>delete</mat-icon>
+                </a>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="8">Aucune donnée correspondant au filtre "{{input.value}}"</td>
+        </tr>
+    </table>
+    
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Sélectionner une page de réservations"></mat-paginator>
+</div>

@@ -14,12 +14,12 @@ import { ListReservationsComponent } from './list-reservations/list-reservations
 import { ReservationsComponent } from './reservations/reservations.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ReservationsService } from './services/reservations.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ListReservationsComponent,
     ReservationsComponent
   ],
   imports: [
@@ -34,7 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
   ],
   providers: [
-    provideClientHydration(withEventReplay())
+    provideClientHydration(withEventReplay()),
+    ReservationsService
   ],
   bootstrap: [AppComponent]
 })
