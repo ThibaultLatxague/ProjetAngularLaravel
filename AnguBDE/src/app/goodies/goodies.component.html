@@ -1,1 +1,71 @@
-<p>goodies works!</p>
+<div class="monForm">
+    <section class="subForm saisieForm">
+        <h2>Nouveau Goodie</h2>
+        <form [formGroup]="formulaire" class="example-form">
+
+            <div class="form-group">
+                <mat-form-field class="input example-full-width">
+                    <mat-label>Titre</mat-label>
+                    <input type="text" matInput id="nom" formControlName="nom" class="form-control" placeholder="Ex. Le T-shrirt du BDE">
+                    @if (formulaire.get('nom')?.hasError('required')) {
+                        <mat-error>Ce champ est requis</mat-error>
+                    }
+                    @if (formulaire.get('nom')?.hasError('minlength')) {
+                        <mat-error>Ce champ doit comporter au moins <strong>2 caractères</strong></mat-error>
+                    }
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <mat-form-field class="input example-full-width">
+                    <mat-label>Quantité</mat-label>
+                    <input type="number" matInput id="quantite" formControlName="quantite" class="form-control" placeholder="Ex. 13">
+                    @if (formulaire.get('quantite"')?.hasError('required')) {
+                        <mat-error>Ce champ est requis</mat-error>
+                    }
+                    @if (formulaire.get('quantite"')?.hasError('min')) {
+                        <mat-error>Ce champ doit être supérieur ou égal à 0</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            
+            <div class="form-group">
+                <mat-form-field class="input example-full-width">
+                    <mat-label>Description</mat-label>
+                    <input type="text" matInput id="description" formControlName="description" class="form-control" placeholder="Ex. Un T-shrirt 100% coton">
+                    @if (formulaire.get('description')?.hasError('required')) {
+                        <mat-error>Ce champ est requis</mat-error>
+                    }
+                    @if (formulaire.get('description')?.hasError('minlength')) {
+                        <mat-error>Ce champ doit comporter au moins <strong>10 caractères</strong></mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            
+            <div class="form-group">
+                <mat-form-field class="input example-full-width">
+                    <mat-label>Prix</mat-label>
+                    <input type="number" matInput id="coutUnitaire" formControlName="coutUnitaire" class="form-control" placeholder="Ex. 12.99">
+                    @if (formulaire.get('coutUnitaire')?.hasError('required')) {
+                        <mat-error>Ce champ est requis</mat-error>
+                    }
+                    @if (formulaire.get('coutUnitaire')?.hasError('min')) {
+                        <mat-error>Ce champ doit être supérieur à 0</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            
+            <button [disabled]="formulaire.invalid" type="submit" (click)="addGoodie()">Envoyer le formulaire</button>
+        </form>
+    </section>
+
+    <section class="subForm visuForm">
+        <h2>Vue du Goodie</h2>
+        @if (currentGoodie !== undefined) {
+            <h3>{{currentGoodie.nom}}</h3>
+            <p>Quantite : {{currentGoodie.quantite}}</p>
+            <p>Description : {{currentGoodie.description}}</p>
+            <p>Prix : {{currentGoodie.coutUnitaire}}</p>
+        }
+    </section>
+</div>

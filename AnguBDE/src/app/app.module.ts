@@ -13,12 +13,12 @@ import { GoodiesComponent } from './goodies/goodies.component';
 import { ListReservationsComponent } from './list-reservations/list-reservations.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    GoodiesComponent,
     ListReservationsComponent,
     ReservationsComponent
   ],
@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    ReactiveFormsModule ,
     HttpClientModule,
   ],
   providers: [
