@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\goodies;
 
 class GoodiesController extends Controller
 {
@@ -11,7 +12,7 @@ class GoodiesController extends Controller
      */
     public function index()
     {
-        return response()->json(Goodie::all());
+        return response()->json(goodies::all());
     }
 
     /**
@@ -19,7 +20,7 @@ class GoodiesController extends Controller
      */
     public function store(Request $request)
     {
-        $goodie = Goodie::create($request->all());
+        $goodie = goodies::create($request->all());
         return response()->json($goodie, 201);
     }
 
@@ -28,7 +29,7 @@ class GoodiesController extends Controller
      */
     public function show($id)
     {
-        $goodie = Goodie::find($id);
+        $goodie = goodies::find($id);
         if (!$goodie) {
             return response()->json(['message' => 'Goodie non trouvé'], 404);
         }
@@ -39,7 +40,7 @@ class GoodiesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Goodie $goodie)
+    public function update(Request $request, goodies $goodie)
     {
         $goodie->update($request->all());
         return response()->json($goodie);
@@ -48,7 +49,7 @@ class GoodiesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Goodie $goodie)
+    public function destroy(goodies $goodie)
     {
         $goodie->delete();
         return response()->json(null, 204);

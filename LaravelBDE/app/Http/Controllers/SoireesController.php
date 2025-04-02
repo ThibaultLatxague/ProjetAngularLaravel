@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\soirees;  // Assurez-vous que le modèle Soiree est correctement importé
 
 class SoireesController extends Controller
 {
@@ -11,7 +12,7 @@ class SoireesController extends Controller
      */
     public function index()
     {
-        return response()->json(Soiree::all());
+        return response()->json(soirees::all());
     }
 
     /**
@@ -19,7 +20,7 @@ class SoireesController extends Controller
      */
     public function store(Request $request)
     {
-        $soiree = Soiree::create($request->all());
+        $soiree = soirees::create($request->all());
         return response()->json($soiree, 201);
     }
 
@@ -28,7 +29,7 @@ class SoireesController extends Controller
      */
     public function show(string $id)
     {
-        $soiree = Soiree::find($id);  // Recherche la soirée par ID
+        $soiree = soirees::find($id);  // Recherche la soirée par ID
         if (!$soiree) {
             return response()->json(['message' => 'Soirée not found'], 404);  // Si la soirée n'existe pas
         }
@@ -38,7 +39,7 @@ class SoireesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Soiree $soiree)
+    public function update(Request $request, soirees $soiree)
     {
         $soiree->update($request->all());
         return response()->json($soiree);
@@ -47,7 +48,7 @@ class SoireesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Soiree $soiree)
+    public function destroy(soirees $soiree)
     {
         $soiree->delete();
         return response()->json(null, 204);

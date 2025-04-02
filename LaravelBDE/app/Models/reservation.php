@@ -25,6 +25,6 @@ class reservation extends Model
 
     public function soiree()
     {
-        return $this->belongsTo(soiree::class);
+        return $this->belongsTo(soirees::class);
     }
 }
