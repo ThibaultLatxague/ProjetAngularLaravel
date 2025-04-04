@@ -21,7 +21,7 @@ import { MatFormField } from '@angular/material/input';
 })
 
 export class ListReservationsComponent implements AfterViewInit, OnInit {
-  displayedColumns: string[] = ['id', 'nomEtudiant', 'email_etudiant', 'telephone_etudiant', 'nom_soiree', 'date_reservation', 'statut', 'idSoiree', 'goodies', 'action'];
+  displayedColumns: string[] = ['id', 'nom_etudiant', 'email_etudiant', 'telephone_etudiant', 'nom_soiree', 'date_reservation', 'statut', 'goodies', 'action'];
   dataSource = new MatTableDataSource<Reservation>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -32,7 +32,7 @@ export class ListReservationsComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     this.reservationService.getReservations().subscribe((reservations: Reservation[]) => {
       this.dataSource.data = reservations;  
-      console.log(this.dataSource);
+      console.log(this.dataSource.data);
       
       // Vérifie si paginator et sort existent avant de les assigner
       if (this.paginator && this.sort) {
