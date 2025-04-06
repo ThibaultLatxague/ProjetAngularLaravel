@@ -29,7 +29,7 @@ export class GoodiesService {
 
   // On ajoute un goodies
   addGoodie(goodie: Goodies): Observable<Goodies> {
-    return this.http.post<Goodies>('http://localhost:8000/goodies', goodie, httpOptions);
+    return this.http.post<Goodies>('http://localhost:8000/goodies', goodie);
   }
 
   // On met à jour un goodies

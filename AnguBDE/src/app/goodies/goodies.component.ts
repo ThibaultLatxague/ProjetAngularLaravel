@@ -63,9 +63,7 @@ export class GoodiesComponent implements OnInit{
         this.router.navigateByUrl('/goodies');
       },
       error: err => {
-        console.error('Observable ajout Goodie a émis une erreur : ' + + (err.error?.message || JSON.stringify(err)));
-        alert('Une erreur est survenue : ' + (err.error?.message || JSON.stringify(err)));
-      }
+        console.error('Observable ajout Goodie a émis une erreur : ' + + (err.error?.message || JSON.stringify(err)));      }
     })
   }
 }

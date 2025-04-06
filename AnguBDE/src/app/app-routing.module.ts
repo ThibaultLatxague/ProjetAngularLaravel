@@ -39,6 +39,10 @@ const routes: Routes = [
   {
     path: 'reservations/view/:id',
     component: ReservationsComponent
+  },
+  {
+    path: 'reservations/add',
+    component: ReservationsComponent
   }
 ];
 
