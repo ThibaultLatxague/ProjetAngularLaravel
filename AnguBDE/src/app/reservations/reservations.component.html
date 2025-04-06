@@ -23,8 +23,8 @@
                     @if (formulaire.get('email_etudiant"')?.hasError('required')) {
                         <mat-error>Ce champ est requis</mat-error>
                     }
-                    @if (formulaire.get('email_etudiant"')?.hasError('min')) {
-                        <mat-error>Ce champ doit être supérieur ou égal à 0</mat-error>
+                    @if (formulaire.get('email_etudiant"')?.hasError('email')) {
+                        <mat-error>Ce champ doit être un email valide</mat-error>
                     }
                 </mat-form-field>
             </div>
@@ -32,12 +32,12 @@
             <div class="form-group">
                 <mat-form-field class="input example-full-width">
                     <mat-label>Téléphone étudiant</mat-label>
-                    <input type="text" matInput id="telephone_etudiant" formControlName="telephone_etudiant" class="form-control" placeholder="Ex. +33 06 37 07 41 42 (appelle moi)">
+                    <input type="text" matInput id="telephone_etudiant" formControlName="telephone_etudiant" class="form-control" placeholder="Ex. 06 37 07 41 42 (appelle moi)">
                     @if (formulaire.get('telephone_etudiant')?.hasError('required')) {
                         <mat-error>Ce champ est requis</mat-error>
                     }
-                    @if (formulaire.get('telephone_etudiant')?.hasError('minlength')) {
-                        <mat-error>Ce champ doit comporter au moins <strong>10 caractères</strong></mat-error>
+                    @if (formulaire.get('telephone_etudiant')?.hasError('pattern')) {
+                        <mat-error>Ce champ doit être un numéro de téléphone valide</mat-error>
                     }
                 </mat-form-field>
             </div>
@@ -49,8 +49,8 @@
                     @if (formulaire.get('nom_soiree')?.hasError('required')) {
                         <mat-error>Ce champ est requis</mat-error>
                     }
-                    @if (formulaire.get('nom_soiree')?.hasError('min')) {
-                        <mat-error>Ce champ doit être supérieur à 0</mat-error>
+                    @if (formulaire.get('nom_soiree')?.hasError('minlength')) {
+                        <mat-error>Ce champ doit comporter au moins <strong>2 caractères</strong></mat-error>
                     }
                 </mat-form-field>
             </div>
@@ -58,7 +58,7 @@
             <div class="form-group">
                 <mat-form-field class="input example-full-width">
                     <mat-label>Date reservation</mat-label>
-                    <input type="datetime-local" matInput id="date_reservation formControlName="date_reservation class="form-control">
+                    <input type="datetime-local" matInput id="date_reservation" formControlName="date_reservation" class="form-control">
                     @if (formulaire.get('date_reservation')?.hasError('required')) {
                         <mat-error>Ce champ est requis</mat-error>
                     }
