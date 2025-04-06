@@ -10,7 +10,6 @@
 </mat-form-field>
 
 <div class="mat-elevation-z8">
-    {{dataSource.data[0].email_etudiant}}
     <table mat-table [dataSource]="dataSource" matSort>
 
         <!-- ID Column -->
@@ -58,7 +57,9 @@
         <!-- Goodies Column -->
         <ng-container matColumnDef="goodies">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Goodies </th>
-            <td mat-cell *matCellDef="let row"> {{row.goodies}} </td>
+            <td mat-cell *matCellDef="let row">
+                {{row.goodies}}
+            </td>
         </ng-container>
 
         <!-- Action Column -->

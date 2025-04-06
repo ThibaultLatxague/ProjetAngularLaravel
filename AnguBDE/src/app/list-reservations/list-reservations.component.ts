@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { ReservationsService } from '../services/reservations.service';
 import { Reservation } from '../models/reservation.model';
 import { MatFormField } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -17,7 +18,7 @@ import { MatFormField } from '@angular/material/input';
   selector: 'app-list-reservations',
   templateUrl: './list-reservations.component.html',
   styleUrl: './list-reservations.component.scss',
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, CommonModule],
 })
 
 export class ListReservationsComponent implements AfterViewInit, OnInit {
@@ -31,8 +32,7 @@ export class ListReservationsComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.reservationService.getReservations().subscribe((reservations: Reservation[]) => {
-      this.dataSource.data = reservations;  
-      console.log(this.dataSource.data);
+      this.dataSource.data = reservations;
       
       // Vérifie si paginator et sort existent avant de les assigner
       if (this.paginator && this.sort) {

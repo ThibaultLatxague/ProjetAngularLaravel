@@ -8,6 +8,7 @@ export class Reservation {
     statut!: string;
     idSoiree!: number;
     goodies?: string[];
+    goodiesArray?: string[]; // Pour afficher les goodies sous forme de tableau dans la table
 
     constructor(id: number, nomEtudiant: string, email: string, telephone: string, nomSoiree: string, dateReservation: Date, statut: string, idSoiree: number, goodies?: string[]) {
         this.id = id;
