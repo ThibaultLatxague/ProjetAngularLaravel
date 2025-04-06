@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReservationsService } from '../services/reservations.service';
 import { Router } from '@angular/router';
 import { Reservation } from '../models/reservation.model';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core'; // mat-option est ici
 
 import {
   FormsModule,
@@ -16,7 +18,7 @@ import {
   selector: 'app-reservations',
   templateUrl: './reservations.component.html',
   styleUrl: './reservations.component.scss',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule]
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatFormFieldModule, MatOptionModule, MatSelectModule],
 })
 export class ReservationsComponent {
   formulaire!: FormGroup;
