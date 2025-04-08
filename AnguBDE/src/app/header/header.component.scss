@@ -1,38 +1,122 @@
-nav {
-  background-color: #395177;
+/* Variables pour la personnalisation facile */
+:root {
+  --primary-color: #3f51b5;
+  --primary-dark: #303f9f;
+  --text-light: #ffffff;
+  --text-dark: #333333;
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --transition: all 0.3s ease;
+}
+
+.app-header {
+  background-color: var(--primary-color);
   width: 100%;
-  height: 10%;
-  text-align: center;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.example-flex-container {
+  height: auto;
+  padding: 12px 24px;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
 }
 
-.example-button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: auto;
-}
-
-.example-button-container a {
+.logo-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  padding: 10px 16px;
 }
 
-.button-self {
+.logo {
+  height: 40px;
+  margin-right: 12px;
+}
+
+.site-title {
+  color: var(--text-light);
+  font-size: 1.5rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.main-nav {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  &:hover {
-      background-color: #f8f9fa;
+  margin-right: 5%;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-links a {
+  color: var(--text-light);
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.active-link {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 8px;
+}
+
+/* Styles responsive */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .logo-container {
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+  }
+  
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 12px;
+  }
+  
+  .nav-links.nav-open {
+    display: flex;
+  }
+  
+  .nav-links a {
+    width: 100%;
+    text-align: left;
+    padding: 12px;
+  }
+}
+
+/* Pour les très petits écrans */
+@media (max-width: 480px) {
+  .site-title {
+    font-size: 1.2rem;
   }
 }

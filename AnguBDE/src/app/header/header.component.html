@@ -1,21 +1,26 @@
-<nav>
-  <div class="example-button-row">
-      <div class="example-flex-container">
-          <div class="example-button-container">
-              <a mat-fab extended routerLink="/soirees">
-                  Soirées
-              </a>
-          </div>
-          <div class="example-button-container">
-              <a mat-fab extended routerLink="/reservations">
-                  Réservations
-              </a>
-          </div>
-          <div class="example-button-container">
-              <a mat-fab extended routerLink="/goodies">
-                  Goodies
-              </a>
-          </div>
-      </div>
-  </div>
-</nav>
+<header class="app-header">
+    <div class="logo-container">
+        <span class="site-title">BDE Manager</span>
+    </div>
+    
+    <nav class="main-nav">
+        <button class="menu-toggle" (click)="toggleMenu()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        
+        <div class="nav-links" [class.nav-open]="menuOpen">
+            <a mat-button routerLink="/soirees" routerLinkActive="active-link">
+            <mat-icon>nightlife</mat-icon>
+            <span>Soirées</span>
+            </a>
+            <a mat-button routerLink="/reservations" routerLinkActive="active-link">
+            <mat-icon>book_online</mat-icon>
+            <span>Réservations</span>
+            </a>
+            <a mat-button routerLink="/goodies" routerLinkActive="active-link">
+            <mat-icon>card_giftcard</mat-icon>
+            <span>Goodies</span>
+            </a>
+        </div>
+    </nav>
+</header>

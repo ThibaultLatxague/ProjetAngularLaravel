@@ -11,6 +11,11 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class HeaderComponent {
   private breakpointObserver = inject(BreakpointObserver);
+  menuOpen = false;
+  
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
