@@ -1,4 +1,4 @@
-<section>
+<section id="btnReservation">
     <div class="example-button-row">
         <a mat-raised-button routerLink="/reservations/add">Ajouter une réservation</a>
     </div>
@@ -64,12 +64,12 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let row">
-          <a mat-fab extended>
+          <button mat-icon-button>
             <mat-icon>edit</mat-icon>
-          </a>
-          <a mat-fab extended (click)="deleteReservation(row.id)" style="cursor: pointer;">
+          </button>
+          <button mat-icon-button (click)="deleteReservation(row.id)">
             <mat-icon>delete</mat-icon>
-        </a>
+          </button>
         </td>
       </ng-container>
   
