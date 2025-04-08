@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
 import { ListSoireesComponent } from './list-soirees/list-soirees.component';
 import { ListGoodiesComponent } from './list-goodies/list-goodies.component';
 import { GoodiesComponent } from './goodies/goodies.component';
@@ -10,7 +9,7 @@ import { ReservationsComponent } from './reservations/reservations.component';
 const routes: Routes = [
   {
     path: '',
-    component: HeaderComponent
+    component: ListSoireesComponent
   },
   {
     path: 'soirees',

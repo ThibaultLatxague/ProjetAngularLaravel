@@ -22,7 +22,7 @@ Ce projet est une application web de gestion pour un Bureau des Étudiants (BDE)
 
 - **Gestion des réservations**  
   - Visualisation de la liste des réservations.
-  - Création manuelle d'une réservation.
+  - Création manuelle d'une réservation (sans les goodies, mettre [] en donnée).
   - Filtrage des réservations par soirée (clic sur "voir les réservations" d'une soirée).
   - (BONUS) Annulation / suppression d'une réservation
 

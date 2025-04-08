@@ -1,7 +1,6 @@
 import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatLabel } from '@angular/material/form-field';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
@@ -9,7 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { ReservationsService } from '../services/reservations.service';
 import { Reservation } from '../models/reservation.model';
-import { MatFormField } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 

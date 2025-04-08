@@ -1,11 +1,9 @@
-/* Styles SCSS */
 .soiree-container {
   padding: 16px;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Styles pour la barre de recherche */
 .search-container {
   margin-bottom: 24px;
   display: flex;
@@ -27,7 +25,6 @@
   }
 }
 
-/* Message pour aucun résultat */
 .no-results {
   display: flex;
   flex-direction: column;
@@ -67,7 +64,6 @@
   }
 }
 
-/* Grille de soirées */
 .soiree-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -151,13 +147,11 @@
   }
 }
 
-/* Styles pour la pagination */
 mat-paginator {
   margin-top: 24px;
   background: transparent;
 }
 
-/* Media queries pour la responsivité */
 @media (max-width: 599px) {
   .soiree-grid {
     grid-template-columns: 1fr;

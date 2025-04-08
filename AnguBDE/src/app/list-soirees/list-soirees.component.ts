@@ -1,18 +1,15 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import {RouterModule} from '@angular/router';
-import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import { Soiree } from '../models/soiree.model';
 import { SoireesService } from '../services/soirees.service';
-import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { FormsModule } from '@angular/forms';
-import { MatFormField, MatLabel } from '@angular/material/input';
 
 // Imports supplémentaires pour les composants Material 
 import { MatButtonModule } from '@angular/material/button';
@@ -48,7 +45,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class ListSoireesComponent implements OnInit{
   dataSource!: Soiree[];
-  filteredDataSource: any[] = []; // Pour stocker les résultats filtrés
+  filteredDataSource: any[] = [];
   searchText: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -59,7 +56,7 @@ export class ListSoireesComponent implements OnInit{
   ngOnInit() {
     this.mySoireesService.getSoirees().subscribe(soirees => {
       this.dataSource = soirees;
-      this.filteredDataSource = soirees; // Initialement, montrez toutes les soirées
+      this.filteredDataSource = soirees;
     });
   }
 
