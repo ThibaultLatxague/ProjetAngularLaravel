@@ -24,10 +24,42 @@
             <td mat-cell *matCellDef="let row"> {{row.nom}} </td>
         </ng-container>
 
-        <!-- Quantite Column -->
         <ng-container matColumnDef="quantite">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantite </th>
-            <td mat-cell *matCellDef="let row"> {{row.quantite}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantité </th>
+            <td mat-cell *matCellDef="let row">
+              <div class="quantity-editor">
+                <!-- Affichage normal quand pas en mode édition -->
+                @if (!row.editMode) {
+                  <span>{{row.quantite}}</span>
+                }
+                
+                <!-- Input quand en mode édition -->
+                @if (row.editMode) {
+                  <mat-form-field appearance="outline" class="quantity-input">
+                    <input matInput type="number" [(ngModel)]="row.newQuantite" min="0">
+                  </mat-form-field>
+                }
+                
+                <!-- Boutons d'action -->
+                <div class="action-buttons">
+                  @if (!row.editMode) {
+                    <button mat-icon-button color="primary" (click)="editQuantity(row)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  }
+                  
+                  @if (row.editMode) {
+                    <button mat-icon-button color="primary" (click)="saveQuantity(row)">
+                      <mat-icon>save</mat-icon>
+                    </button>
+                    
+                    <button mat-icon-button color="warn" (click)="cancelEdit(row)">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  }
+                </div>
+              </div>
+            </td>
         </ng-container>
 
         <!-- Description Column -->
@@ -46,12 +78,9 @@
         <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
             <td mat-cell *matCellDef="let row">
-                <a mat-fab extended>
-                    <mat-icon>edit</mat-icon>
-                </a>
-                <a mat-fab extended (click)="deleteGoodie(row.id)">
+                <button mat-icon-button (click)="deleteGoodie(row.id)">
                     <mat-icon>delete</mat-icon>
-                </a>
+                </button>
             </td>
         </ng-container>
 

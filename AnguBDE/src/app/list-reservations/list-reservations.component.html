@@ -3,6 +3,7 @@
         <a mat-raised-button routerLink="/reservations/add">Ajouter une réservation</a>
     </div>
 </section>
+<section>
 
 <mat-form-field>
     <mat-label>Filtrer</mat-label>
@@ -67,7 +68,7 @@
           <a mat-fab extended>
             <mat-icon>edit</mat-icon>
           </a>
-          <a mat-fab extended (click)="deleteReservation(row.id)">
+          <a mat-fab extended (click)="deleteReservation(row.id)" style="cursor: pointer;">
             <mat-icon>delete</mat-icon>
         </a>
         </td>

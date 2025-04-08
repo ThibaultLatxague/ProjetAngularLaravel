@@ -9,12 +9,15 @@ import { RouterModule } from '@angular/router';
 import { GoodiesService } from '../services/goodies.service';
 import { Goodies } from '../models/goodies.model';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-list-goodies',
   templateUrl: './list-goodies.component.html',
   styleUrls: ['./list-goodies.component.scss'],
-  imports: [RouterModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule],
+  imports: [RouterModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule,    FormsModule,
+    MatButtonModule],
 })
 export class ListGoodiesComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['id', 'nom', 'quantite', 'description', 'cout', 'action'];
@@ -72,5 +75,33 @@ export class ListGoodiesComponent implements AfterViewInit, OnInit {
         alert('Une erreur est survenue : ' + (err.error?.message || JSON.stringify(err)));
       }
     });
+  }
+
+  // Méthodes à ajouter à votre classe
+  editQuantity(row: any): void {
+    row.editMode = true;
+    row.newQuantite = row.quantite;
+  }
+
+  saveQuantity(row: any): void {
+    // Appel à votre service pour sauvegarder la nouvelle quantité
+    const updatedItem = {
+      ...row,
+      quantite: row.newQuantite
+    };
+    
+    this.myGoodiesService.updateGoodie(updatedItem).subscribe({
+      next: (result) => {
+        row.quantite = row.newQuantite;
+        row.editMode = false;
+      },
+      error: (error) => {
+        console.error('Erreur lors de la mise à jour:', error);
+      }
+    });
+  }
+
+  cancelEdit(row: any): void {
+    row.editMode = false;
   }
 }

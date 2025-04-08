@@ -43,3 +43,23 @@ section {
   justify-content: center;
   width: 140px;
 }
+
+.quantity-editor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.quantity-input {
+  width: 70px;
+  margin-right: 8px;
+}
+
+.action-buttons {
+  display: flex;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0;
+  padding-bottom: 0;
+}

@@ -11,11 +11,11 @@
         <mat-chip-set aria-label="Soirée details">
           <mat-chip><mat-icon>attach_money</mat-icon>{{ soiree.prix }}</mat-chip>
           <mat-chip><mat-icon>person</mat-icon>{{ soiree.capacite }}</mat-chip>
-          <mat-chip><mat-icon>celebration</mat-icon>{{ soiree.theme }}</mat-chip>
-          <a routerLink="/reservations/{{ soiree.id }}">
-            <mat-chip><mat-icon>book</mat-icon>Réservations</mat-chip>
-          </a>
+          <mat-chip><mat-icon>celebration</mat-icon>{{ soiree.theme }}</mat-chip>          
         </mat-chip-set>
       </mat-card-footer>
+          <button type="button" routerLink="/reservations/{{ soiree.id }}" style="cursor: pointer;">
+            <mat-icon>book</mat-icon>Voir les réservations
+          </button>
     </mat-card>
   </div>

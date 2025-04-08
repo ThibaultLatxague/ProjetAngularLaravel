@@ -1,33 +1,73 @@
 .container {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  .example-card {
-    min-width: 250px;
-    max-width: 100%;
-  }
-  
-  @media screen and (max-width: 1200px) {
-    .example-card {
-      flex: 1 1 calc(33.33% - 16px);
-    }
-  }
-  
-  @media screen and (max-width: 900px) {
-    .example-card {
-      flex: 1 1 calc(50% - 16px);
-    }
-  }
-  
-  @media screen and (max-width: 600px) {
-    .example-card {
-      flex: 1 1 calc(100% - 16px);
-    }
-  }
-  
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.example-card {
+  min-width: 250px;
+  max-width: 100%;
+  text-align: center; /* Centre le texte dans la carte */
+}
+
+mat-card-content {
+  padding: 10px 0; /* Ajoute un peu d'espace vertical */
+}
+
+mat-card-title {
+  font-weight: bold; /* Rend le titre plus visible */
+}
+
+/* Style pour le bouton */
+button[routerLink] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 16px;
+  background-color: #3f51b5; /* Couleur primaire d'Angular Material */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[routerLink]:hover {
+  background-color: #303f9f; /* Couleur légèrement plus foncée au survol */
+}
+
+button[routerLink] mat-icon {
+  margin-right: 8px;
+}
+
+/* Style pour les chips */
+mat-chip-set {
+  justify-content: center; /* Centre les chips */
+  margin-bottom: 16px;
+}
 
 .example-card-footer {
-    padding: 16px;
+  padding: 16px;
+}
+
+@media screen and (max-width: 1200px) {
+  .example-card {
+      flex: 1 1 calc(33.33% - 16px);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .example-card {
+      flex: 1 1 calc(50% - 16px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .example-card {
+      flex: 1 1 calc(100% - 16px);
+  }
 }

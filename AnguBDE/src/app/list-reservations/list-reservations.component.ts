@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-list-reservations',
   templateUrl: './list-reservations.component.html',
-  styleUrls: ['./list-reservations.component.scss'],
+  styleUrl: './list-reservations.component.scss',
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, CommonModule, RouterModule],
 })
