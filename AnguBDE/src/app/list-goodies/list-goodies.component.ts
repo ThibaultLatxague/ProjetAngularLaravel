@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 export class ListGoodiesComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['id', 'nom', 'quantite', 'description', 'cout', 'action'];
   dataSource = new MatTableDataSource<Goodies>([]);
+  goodiesActuel!: Goodies;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

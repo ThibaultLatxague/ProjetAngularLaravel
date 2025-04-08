@@ -49,9 +49,15 @@ class GoodiesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(goodies $goodie)
+    public function destroy($id)
     {
-        $goodie->delete();
-        return response()->json(null, 204);
+        $goodie = goodies::find($id);
+
+        if ($goodie) {
+            $goodie->delete();
+            return response()->json(['message' => 'Goodie supprimé avec succès'], 200);
+        }
+    
+        return response()->json(['message' => 'Goodie non trouvé'], 404);
     }
 }

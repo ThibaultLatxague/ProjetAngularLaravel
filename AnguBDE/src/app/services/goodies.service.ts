@@ -40,5 +40,5 @@ export class GoodiesService {
   // On supprime un goodies
   deleteGoodie(id: number): Observable<void> {
     return this.http.delete<void>(`http://localhost:8000/goodies/${id}`);
-  }
+  }  
 }
