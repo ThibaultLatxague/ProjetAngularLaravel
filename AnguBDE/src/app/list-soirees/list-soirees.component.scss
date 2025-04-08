@@ -1,84 +1,114 @@
-.container {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
-
-.example-card {
-  min-width: 250px;
-  max-width: 100%;
-  text-align: center; /* Centre le texte dans la carte */
-}
-
-mat-card-content {
-  padding: 10px 0; /* Ajoute un peu d'espace vertical */
-}
-
-mat-card-title {
-  font-weight: bold; /* Rend le titre plus visible */
-}
-
-/* Style pour le bouton */
-button[routerLink] {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px 16px;
-  background-color: #3f51b5; /* Couleur primaire d'Angular Material */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button[routerLink]:hover {
-  background-color: #303f9f; /* Couleur légèrement plus foncée au survol */
-}
-
-button[routerLink] mat-icon {
-  margin-right: 8px;
-}
-
-/* Style pour les chips */
-mat-chip-set {
-  justify-content: center; /* Centre les chips */
-  margin-bottom: 16px;
-}
-
-.example-card-footer {
+/* Styles SCSS */
+.soiree-container {
   padding: 16px;
-}
-
-@media screen and (max-width: 1200px) {
-  .example-card {
-      flex: 1 1 calc(33.33% - 16px);
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .example-card {
-      flex: 1 1 calc(50% - 16px);
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .example-card {
-      flex: 1 1 calc(100% - 16px);
-  }
-}
-
-.search-container {
-  display: flex;
-  justify-content: center;
-  padding: 20px 20px 0;
-}
-
-.search-field {
   width: 100%;
-  max-width: 500px;
+  box-sizing: border-box;
+}
+
+.soiree-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.soiree-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  mat-card-header {
+    padding: 16px 16px 0;
+    
+    mat-card-title {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+  }
+
+  mat-card-content {
+    padding: 0 16px;
+    flex-grow: 1;
+    
+    p {
+      display: flex;
+      align-items: center;
+      margin: 8px 0;
+      
+      mat-icon {
+        margin-right: 8px;
+        font-size: 18px;
+        height: 18px;
+        width: 18px;
+        color: #666;
+      }
+    }
+  }
+
+  .soiree-footer {
+    padding: 8px 16px;
+    
+    mat-chip-set {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    mat-chip {
+      display: flex;
+      align-items: center;
+      
+      mat-icon {
+        margin-right: 4px;
+        font-size: 16px;
+        height: 16px;
+        width: 16px;
+      }
+    }
+  }
+
+  .soiree-actions {
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    
+    button {
+      width: 100%;
+      
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+/* Media queries pour la responsivité */
+@media (max-width: 599px) {
+  .soiree-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 959px) {
+  .soiree-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) and (max-width: 1279px) {
+  .soiree-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .soiree-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

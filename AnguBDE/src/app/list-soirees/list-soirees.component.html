@@ -1,21 +1,27 @@
-<div fxLayout="row wrap" fxLayoutGap="16px" class="container">
-    <mat-card *ngFor="let soiree of dataSource" class="example-card" fxFlex="1 1 calc(25% - 16px)">
+<!-- Template HTML -->
+<div class="soiree-container">
+  <div class="soiree-grid">
+    <mat-card *ngFor="let soiree of dataSource" class="soiree-card">
       <mat-card-header>
         <mat-card-title>{{ soiree.nom }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p>{{ soiree.lieu }}</p>
-        <p>{{ soiree.date }}</p>
+        <p class="soiree-location"><mat-icon>location_on</mat-icon>{{ soiree.lieu }}</p>
+        <p class="soiree-date"><mat-icon>calendar_today</mat-icon>{{ soiree.date }}</p>
       </mat-card-content>
-      <mat-card-footer class="example-card-footer">
-        <mat-chip-set aria-label="Soirée details">
+      <mat-card-footer class="soiree-footer">
+        <mat-chip-set>
           <mat-chip><mat-icon>attach_money</mat-icon>{{ soiree.prix }}</mat-chip>
           <mat-chip><mat-icon>person</mat-icon>{{ soiree.capacite }}</mat-chip>
           <mat-chip><mat-icon>celebration</mat-icon>{{ soiree.theme }}</mat-chip>          
         </mat-chip-set>
       </mat-card-footer>
-          <button type="button" routerLink="/reservations/{{ soiree.id }}" style="cursor: pointer;">
-            <mat-icon>book</mat-icon>Voir les réservations
-          </button>
+      <div class="soiree-actions">
+        <button mat-raised-button color="primary" routerLink="/reservations/{{ soiree.id }}">
+          <mat-icon>book</mat-icon>
+          <span>Voir les réservations</span>
+        </button>
+      </div>
     </mat-card>
   </div>
+</div>

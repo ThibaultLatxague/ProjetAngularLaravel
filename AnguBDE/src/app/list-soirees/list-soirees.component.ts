@@ -12,13 +12,38 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { FormsModule } from '@angular/forms';
+import { MatFormField, MatLabel } from '@angular/material/input';
+
+// Imports supplémentaires pour les composants Material 
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @Component({
   selector: 'app-list-soirees',
   standalone: true,
   templateUrl: './list-soirees.component.html',
-  imports: [MatCardModule, MatChipsModule, MatProgressBarModule, MatIconModule, CommonModule, RouterModule, FormsModule],
+  imports: [
+    MatCardModule, 
+    MatChipsModule, 
+    MatProgressBarModule, 
+    MatIconModule, 
+    CommonModule, 
+    RouterModule, 
+    FormsModule, 
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatTooltipModule
+  ],
   styleUrl: './list-soirees.component.scss'
 })
 export class ListSoireesComponent implements OnInit{
