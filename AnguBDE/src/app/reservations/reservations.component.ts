@@ -50,7 +50,7 @@ export class ReservationsComponent {
     this.formulaire.valueChanges.subscribe((formValue) => {
       this.currentReservation = {
         id: 0,
-        nomEtudiant: formValue.nom,
+        nom_etudiant: formValue.nom,
         email_etudiant : formValue.email_etudiant,
         telephone_etudiant: formValue.telephone_etudiant,
         nom_soiree: formValue.soiree.nom,
@@ -66,7 +66,7 @@ export class ReservationsComponent {
   addReservation(): void {
     this.newReservation = {
       id: 0,
-      nomEtudiant: this.formulaire.get('nom')?.value,
+      nom_etudiant: this.formulaire.get('nom')?.value,
       email_etudiant: this.formulaire.get('email_etudiant')?.value,
       telephone_etudiant: this.formulaire.get('telephone_etudiant')?.value,
       nom_soiree: this.formulaire.get('soiree')?.value.nom,
@@ -75,6 +75,8 @@ export class ReservationsComponent {
       goodies: this.formulaire.get('goodies')?.value,
       idSoiree: this.formulaire.get('soiree')?.value.id
     };    
+    
+    console.log(this.newReservation);
 
     this.reservationService.addReservation(this.newReservation).subscribe({
       next: goodie => {
