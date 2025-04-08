@@ -21,7 +21,7 @@ import { CommonModule } from '@angular/common';
 })
 
 export class ListReservationsComponent implements AfterViewInit, OnInit {
-  displayedColumns: string[] = ['id', 'nom_etudiant', 'email_etudiant', 'telephone_etudiant', 'nom_soiree', 'id_soiree', 'date_reservation', 'statut', 'goodies', 'action'];
+  displayedColumns: string[] = ['id', 'nom_etudiant', 'email_etudiant', 'telephone_etudiant', 'nom_soiree', 'date_reservation', 'statut', 'goodies', 'action'];
   dataSource = new MatTableDataSource<Reservation>([]);
   reservationId: number | null = null;
 
