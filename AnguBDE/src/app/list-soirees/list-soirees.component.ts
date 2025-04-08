@@ -11,16 +11,20 @@ import { SoireesService } from '../services/soirees.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-list-soirees',
   standalone: true,
   templateUrl: './list-soirees.component.html',
-  imports: [MatCardModule, MatChipsModule, MatProgressBarModule, MatIconModule, CommonModule, RouterModule],
+  imports: [MatCardModule, MatChipsModule, MatProgressBarModule, MatIconModule, CommonModule, RouterModule, FormsModule],
   styleUrl: './list-soirees.component.scss'
 })
 export class ListSoireesComponent implements OnInit{
   dataSource!: Soiree[];
+  filteredDataSource: any[] = []; // Pour stocker les résultats filtrés
+  searchText: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -28,9 +32,28 @@ export class ListSoireesComponent implements OnInit{
   constructor(private mySoireesService: SoireesService) {}
 
   ngOnInit() {
-    this.mySoireesService.getSoirees().subscribe((soirees: Soiree[]) => {
+    this.mySoireesService.getSoirees().subscribe(soirees => {
       this.dataSource = soirees;
-      console.log(this.dataSource);
+      this.filteredDataSource = soirees; // Initialement, montrez toutes les soirées
     });
+  }
+
+  filterSoirees() {
+    if (!this.searchText) {
+      this.filteredDataSource = this.dataSource;
+      return;
+    }
+    
+    const searchTermLower = this.searchText.toLowerCase();
+    this.filteredDataSource = this.dataSource.filter(soiree => 
+      soiree.nom.toLowerCase().includes(searchTermLower) ||
+      soiree.theme.toLowerCase().includes(searchTermLower) ||
+      soiree.lieu.toLowerCase().includes(searchTermLower)
+    );
+  }
+
+  clearSearch() {
+    this.searchText = '';
+    this.filterSoirees();
   }
 }
