@@ -31,44 +31,13 @@ export class ListReservationsComponent implements AfterViewInit, OnInit {
   constructor(private reservationService: ReservationsService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
+    // Charger les réservations lors de l'initialisation du composant
+    this.loadReservations();
+
+    // Récupérer l'ID du paramètre de la route
     const idParam = this.route.snapshot.paramMap.get('id');
     this.reservationId = idParam ? +idParam : null;
     console.log(this.reservationId);
-
-    this.reservationService.getReservations().subscribe((reservations: Reservation[]) => {
-      this.dataSource.data = reservations;
-
-      this.dataSource.data.forEach((reservation: any) => {
-        let goodiesStr = reservation.goodies;
-      
-        try {
-          const goodies = JSON.parse(goodiesStr);
-      
-          if (Array.isArray(goodies)) {
-            reservation.goodies = 'Aucun goodies';
-          } else {
-            reservation.goodies = Object.entries(goodies)
-              .map(([key, value]) => `${key} (${value})`)
-              .join(', ');
-          }
-        } catch (e) {
-          reservation.goodies = 'Aucun goodies';
-        }
-      });
-      
-      // Filtrer les données si un ID est spécifié
-      if (this.reservationId !== null) {
-        this.dataSource.data = reservations.filter(res => res.idSoiree === this.reservationId);
-      } else {
-        this.dataSource.data = reservations;
-      }   
-      
-      // Vérifie si paginator et sort existent avant de les assigner
-      if (this.paginator && this.sort) {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }
-    });
   }
 
   ngAfterViewInit() {
@@ -89,11 +58,54 @@ export class ListReservationsComponent implements AfterViewInit, OnInit {
   deleteReservation(id: number): void {
     this.reservationService.deleteReservation(id).subscribe({
       next: () => {
+        // Recharger les données après suppression de la réservation
+        this.loadReservations(); // Appeler cette méthode pour recharger les réservations
         this.router.navigateByUrl('/reservations');
       },
       error: err => {
         console.error('Erreur lors de la suppression de la réservation : ' + (err.error?.message || JSON.stringify(err)));
         alert('Une erreur est survenue : ' + (err.error?.message || JSON.stringify(err)));
+      }
+    });
+  }
+
+  loadReservations(): void {
+    this.reservationService.getReservations().subscribe((reservations: Reservation[]) => {
+      // Mettre à jour les données de source
+      this.dataSource.data = reservations;
+  
+      // Traiter les goodies après la récupération des données
+      this.dataSource.data.forEach((reservation: any) => {
+        let goodiesStr = reservation.goodies;
+  
+        try {
+          const goodies = JSON.parse(goodiesStr);
+  
+          if (Array.isArray(goodies) && goodies.length === 0) {
+            reservation.goodies = 'Aucun goodies';
+          } else if (goodies && typeof goodies === 'object') {
+            reservation.goodies = Object.entries(goodies)
+              .map(([key, value]) => `${key} (${value})`)
+              .join(', ');
+          } else {
+            reservation.goodies = 'Aucun goodies';
+          }
+        } catch (e) {
+          reservation.goodies = 'Aucun goodies';
+        }
+      });
+  
+      // Filtrer les réservations si un ID est spécifié dans la route
+      if (this.reservationId !== null) {
+        this.dataSource.data = reservations.filter(res => res.idSoiree === this.reservationId);
+      } else {
+        this.dataSource.data = reservations;
+      }
+  
+      // Vérifier si paginator et sort existent avant de les assigner
+      if (this.paginator && this.sort) {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }
     });
   }
