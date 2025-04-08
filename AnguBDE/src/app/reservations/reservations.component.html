@@ -42,18 +42,19 @@
                 </mat-form-field>
             </div>
             
-            <div class="form-group">
-                <mat-form-field class="input example-full-width">
-                    <mat-label>Soiree</mat-label>
-                    <input type="text" matInput id="nom_soiree" formControlName="nom_soiree" class="form-control" placeholder="Ex. Soirée d'investiture de Donal Trump Jr.">
-                    @if (formulaire.get('nom_soiree')?.hasError('required')) {
-                        <mat-error>Ce champ est requis</mat-error>
-                    }
-                    @if (formulaire.get('nom_soiree')?.hasError('minlength')) {
-                        <mat-error>Ce champ doit comporter au moins <strong>2 caractères</strong></mat-error>
-                    }
-                </mat-form-field>
-            </div>
+            <mat-form-field class="input example-full-width">
+                <mat-label>Soirée</mat-label>
+                <mat-select id="soiree" formControlName="soiree">
+                  <mat-option *ngFor="let soiree of listSoirees" [value]="soiree">
+                    {{ soiree.nom }}
+                  </mat-option>
+                </mat-select>
+                @if (formulaire.get('date_reservation')?.hasError('required')) {
+                    <mat-error>Ce champ est requis</mat-error>
+                }              
+            </mat-form-field>
+              
+              
 
             <div class="form-group">
                 <mat-form-field class="input example-full-width">
