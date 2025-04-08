@@ -16,8 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-list-goodies',
   templateUrl: './list-goodies.component.html',
   styleUrls: ['./list-goodies.component.scss'],
-  imports: [RouterModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule,    FormsModule,
-    MatButtonModule],
+  imports: [RouterModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, FormsModule, MatButtonModule],
 })
 export class ListGoodiesComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['id', 'nom', 'quantite', 'description', 'cout', 'action'];

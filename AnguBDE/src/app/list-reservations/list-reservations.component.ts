@@ -11,13 +11,14 @@ import { ReservationsService } from '../services/reservations.service';
 import { Reservation } from '../models/reservation.model';
 import { MatFormField } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-list-reservations',
   templateUrl: './list-reservations.component.html',
-  styleUrl: './list-reservations.component.scss',
+  styleUrls: ['../list-goodies/list-goodies.component.scss'],
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, CommonModule, RouterModule],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, CommonModule, RouterModule,MatButtonModule],
 })
 
 export class ListReservationsComponent implements AfterViewInit, OnInit {
