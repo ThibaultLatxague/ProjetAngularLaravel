@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatSort, MatSortModule} from '@angular/material/sort';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule, MatFormField} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {RouterModule} from '@angular/router';
+import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule, MatFormField } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 import { GoodiesService } from '../services/goodies.service';
 import { Goodies } from '../models/goodies.model';
 import { Router } from '@angular/router';
@@ -13,10 +13,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-list-goodies',
   templateUrl: './list-goodies.component.html',
-  styleUrl: './list-goodies.component.scss',
+  styleUrls: ['./list-goodies.component.scss'],
   imports: [RouterModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule],
 })
-
 export class ListGoodiesComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['id', 'nom', 'quantite', 'description', 'cout', 'action'];
   dataSource = new MatTableDataSource<Goodies>([]);
@@ -28,21 +27,27 @@ export class ListGoodiesComponent implements AfterViewInit, OnInit {
   constructor(private myGoodiesService: GoodiesService, private router: Router) {}
 
   ngOnInit() {
+    // Charger les données des goodies lors de l'initialisation du composant
+    this.loadGoodies();
+  }
+
+  ngAfterViewInit() {
+    // Assigner paginator et sort après que la vue soit chargée
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  loadGoodies(): void {
+    // Récupérer les goodies et les assigner à la source de données
     this.myGoodiesService.getGoodies().subscribe((goodies: Goodies[]) => {
-      this.dataSource.data = goodies;  
+      this.dataSource.data = goodies;
       
-      // Vérifie si paginator et sort existent avant de les assigner
+      // Vérifier si paginator et sort existent avant de les assigner
       if (this.paginator && this.sort) {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
     });
-  }
-
-  ngAfterViewInit() {
-    // Déplace l'affectation ici pour être sûr que la Vue est bien chargée
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {
@@ -55,15 +60,17 @@ export class ListGoodiesComponent implements AfterViewInit, OnInit {
   }
 
   deleteGoodie(id: number): void {
+    // Supprimer un goodie et recharger les goodies après la suppression
     this.myGoodiesService.deleteGoodie(id).subscribe({
       next: () => {
         console.log('Goodie supprimé avec succès');
-        this.router.navigateByUrl('/goodies');
+        // Recharger les goodies après suppression
+        this.loadGoodies();
       },
       error: err => {
-        console.error('Observable suppression Goodie a émis une erreur : ' + + (err.error?.message || JSON.stringify(err)));
+        console.error('Erreur lors de la suppression du goodie : ' + (err.error?.message || JSON.stringify(err)));
         alert('Une erreur est survenue : ' + (err.error?.message || JSON.stringify(err)));
       }
-    })
+    });
   }
 }
