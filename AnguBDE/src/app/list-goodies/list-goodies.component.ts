@@ -56,6 +56,7 @@ export class ListGoodiesComponent implements AfterViewInit, OnInit {
   deleteGoodie(id: number): void {
     this.myGoodiesService.deleteGoodie(id).subscribe({
       next: () => {
+        console.log('Goodie supprimé avec succès');
         this.router.navigateByUrl('/goodies');
       },
       error: err => {

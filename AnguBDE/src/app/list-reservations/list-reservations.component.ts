@@ -34,6 +34,26 @@ export class ListReservationsComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     this.reservationService.getReservations().subscribe((reservations: Reservation[]) => {
       this.dataSource.data = reservations;
+
+      this.dataSource.data.forEach((reservation: any) => {
+        let goodiesStr = reservation.goodies;
+      
+        try {
+          const goodies = JSON.parse(goodiesStr);
+      
+          if (Array.isArray(goodies)) {
+            reservation.goodies = 'Aucun goodies';
+          } else {
+            reservation.goodies = Object.entries(goodies)
+              .map(([key, value]) => `${key} (${value})`)
+              .join(', ');
+          }
+        } catch (e) {
+          reservation.goodies = 'Aucun goodies';
+        }
+      });
+      
+      this.dataSource.data = reservations;      
       
       // Vérifie si paginator et sort existent avant de les assigner
       if (this.paginator && this.sort) {

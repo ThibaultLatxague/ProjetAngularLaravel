@@ -37,8 +37,8 @@ const routes: Routes = [
     component: ListReservationsComponent
   },
   {
-    path: 'reservations/view/:id',
-    component: ReservationsComponent
+    path: 'reservations/:id',
+    component: ListReservationsComponent
   },
   {
     path: 'reservations/add',
