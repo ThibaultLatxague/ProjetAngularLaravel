@@ -6,13 +6,11 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { ReservationsService } from '../services/reservations.service';
 import { Reservation } from '../models/reservation.model';
 import { MatFormField } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
-
-
 
 @Component({
   selector: 'app-list-reservations',
@@ -23,15 +21,20 @@ import { CommonModule } from '@angular/common';
 })
 
 export class ListReservationsComponent implements AfterViewInit, OnInit {
-  displayedColumns: string[] = ['id', 'nom_etudiant', 'email_etudiant', 'telephone_etudiant', 'nom_soiree', 'date_reservation', 'statut', 'goodies', 'action'];
+  displayedColumns: string[] = ['id', 'nom_etudiant', 'email_etudiant', 'telephone_etudiant', 'nom_soiree', 'id_soiree', 'date_reservation', 'statut', 'goodies', 'action'];
   dataSource = new MatTableDataSource<Reservation>([]);
+  reservationId: number | null = null;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private reservationService: ReservationsService, private router: Router) {}
+  constructor(private reservationService: ReservationsService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    this.reservationId = idParam ? +idParam : null;
+    console.log(this.reservationId);
+
     this.reservationService.getReservations().subscribe((reservations: Reservation[]) => {
       this.dataSource.data = reservations;
 
@@ -53,7 +56,12 @@ export class ListReservationsComponent implements AfterViewInit, OnInit {
         }
       });
       
-      this.dataSource.data = reservations;      
+      // Filtrer les données si un ID est spécifié
+      if (this.reservationId !== null) {
+        this.dataSource.data = reservations.filter(res => res.idSoiree === this.reservationId);
+      } else {
+        this.dataSource.data = reservations;
+      }   
       
       // Vérifie si paginator et sort existent avant de les assigner
       if (this.paginator && this.sort) {
