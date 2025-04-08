@@ -1,7 +1,36 @@
 <!-- Template HTML -->
 <div class="soiree-container">
-  <div class="soiree-grid">
-    <mat-card *ngFor="let soiree of dataSource" class="soiree-card">
+  <!-- Barre de recherche -->
+  <div class="search-container">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Rechercher une soirée</mat-label>
+      <input matInput [(ngModel)]="searchText" (input)="filterSoirees()" placeholder="Nom, thème, lieu...">
+      <mat-icon matPrefix>search</mat-icon>
+      <button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    
+    <div class="results-info" *ngIf="dataSource">
+      <span>{{ filteredDataSource.length }} soirée(s) trouvée(s)</span>
+    </div>
+  </div>
+
+  <!-- Message si aucun résultat -->
+  <div *ngIf="filteredDataSource.length === 0" class="no-results">
+    <mat-icon>sentiment_dissatisfied</mat-icon>
+    <p>Aucune soirée ne correspond à votre recherche</p>
+  </div>
+
+  <!-- Chargement en cours -->
+  <div *ngIf="!dataSource" class="loading-spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Chargement des soirées...</p>
+  </div>
+
+  <!-- Grille de soirées -->
+  <div class="soiree-grid" *ngIf="filteredDataSource.length > 0">
+    <mat-card *ngFor="let soiree of filteredDataSource" class="soiree-card">
       <mat-card-header>
         <mat-card-title>{{ soiree.nom }}</mat-card-title>
       </mat-card-header>
@@ -17,11 +46,19 @@
         </mat-chip-set>
       </mat-card-footer>
       <div class="soiree-actions">
-        <button mat-raised-button color="primary" routerLink="/reservations/{{ soiree.id }}">
+        <button mat-raised-button color="primary" routerLink="/reservations/{{ soiree.id }}" matTooltip="Voir les détails et réservations">
           <mat-icon>book</mat-icon>
           <span>Voir les réservations</span>
         </button>
       </div>
     </mat-card>
   </div>
+
+  <!-- Pagination -->
+  <mat-paginator *ngIf="filteredDataSource.length > 12"
+    [length]="filteredDataSource.length"
+    [pageSize]="12"
+    [pageSizeOptions]="[6, 12, 24, 48]"
+    aria-label="Sélectionnez une page">
+  </mat-paginator>
 </div>

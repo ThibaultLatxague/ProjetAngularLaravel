@@ -23,16 +23,19 @@ Ce projet est une application web de gestion pour un Bureau des Étudiants (BDE)
 - **Gestion des réservations**  
   - Visualisation de la liste des réservations.
   - Création manuelle d'une réservation.
-  - Filtrage des réservations par soirée (via l'URL ou autre critère).
-  - (BONUS) Suppression / annulation d'une réservation
+  - Filtrage des réservations par soirée (clic sur "voir les réservations" d'une soirée).
+  - (BONUS) Annulation / suppression d'une réservation
 
 - **Gestion des goodies**  
   - Affichage de la liste des goodies.
-  - Ajout, modification et suppression des goodies.
+  - Ajout et suppression des goodies.
+  - Modification du stock des goodies.
+  - Barre de recherche des goodies.
   - Traitement et affichage formaté des goodies depuis un JSON.
 
 - **Gestion des soirées**  
   - Visualisation des détails d'une soirée.
+  - Barre de recherche des soirées.
   - Navigation vers une page dédiée pour consulter les réservations associées à une soirée donnée.
 
 - **Interface utilisateur moderne**  
